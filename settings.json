@@ -1,0 +1,15 @@
+{
+  "port": 8084,
+
+  "dbIemkHost": "localhost",
+  "dbIemkPort": 5432,
+  "dbIemkUser": "postgres",
+  "dbIemkPassword": "postgres",
+  "dbIemkName": "iemk",
+
+  "dbFhirHost": "localhost",
+  "dbFhirPort": 5432,
+  "dbFhirUser": "postgres",
+  "dbFhirPassword": "postgres",
+  "dbFhirName": "fhirbase"
+}
