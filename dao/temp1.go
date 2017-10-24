@@ -1,10 +1,11 @@
-package reports
+package dao
 
 import (
 	"net/http"
 	"encoding/json"
 	"database/sql"
 	"fmt"
+	"github.com/gorilla/mux"
 )
 
 
@@ -16,7 +17,8 @@ type ResourceSearch struct {
 func GetResourceSearchResult(w http.ResponseWriter, r *http.Request) {
 	setHeaders(w)
 
-	resourceSearch := &ResourceSearch{ResourceType: "CodeSystem", QueryString:`name=foo`}
+	vars := mux.Vars(r)
+	resourceSearch := &ResourceSearch{ResourceType: vars["resourceType"], QueryString: r.URL.RawQuery}
 	b, err := json.Marshal(resourceSearch)
 	if err != nil {
 		fmt.Println(err)

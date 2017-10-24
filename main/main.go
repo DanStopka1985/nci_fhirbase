@@ -12,6 +12,6 @@ import (
 
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/nci", rep.GetResourceSearchResult)
+	router.HandleFunc("/nci/fhir/{resourceType}", rep.GetResourceSearchResult)
 	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(ss.GetSettings().Port), router))
 }
