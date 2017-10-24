@@ -7,11 +7,14 @@ import (
 	"strconv"
 	_ "github.com/lib/pq"
 	ss "../settings"
-	rep "../dao"
+	"../dao"
 )
 
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/nci/fhir/{resourceType}", rep.GetResourceSearchResult)
+	router.HandleFunc("/nci/fhir/{resourceType}", dao.GetResourceSearchResult)
+	router.HandleFunc("/nci/fhir/{resourceType}/{id}", dao.GetResourceById)
+	router.HandleFunc("/nci/fhir/{resourceType}/{id}/_history", dao.GetResourceHistory)
+	router.HandleFunc("/nci/fhir/{resourceType}/{id}/_history/{vid}", dao.GetResourceHistoryById)
 	log.Fatal(http.ListenAndServe(":" + strconv.Itoa(ss.GetSettings().Port), router))
 }
