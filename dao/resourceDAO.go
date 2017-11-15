@@ -39,11 +39,19 @@ func GetResourceHistoryById(w http.ResponseWriter, r *http.Request) {
 	resourceSelect := &ResourceSelect{ResourceType: vars["resourceType"], Id: vars["id"], VersionId: vars["vid"]}
 	params, err := json.Marshal(resourceSelect)
 	P(err)
-	q := vars["vid"]
-	println(q)
 
 	CommonReturn(`SET plv8.start_proc = 'plv8_init'; select fhir_vread_resource::jsonb val from fhir_vread_resource('` + string(params) + `');`, w)
 }
+
+func GetExpandValueSetById(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	resourceSelect := &ResourceSelect{Id: vars["id"]}
+	params, err := json.Marshal(resourceSelect)
+	P(err)
+
+	CommonReturn(`SET plv8.start_proc = 'plv8_init'; select fhir_expand_valueset::jsonb val from fhir_expand_valueset('` + string(params) + `');`, w)
+}
+
 func CommonReturn(query string, w http.ResponseWriter){
 	var in []byte
 

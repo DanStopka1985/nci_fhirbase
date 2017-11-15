@@ -18,23 +18,6 @@ func setHeaders(w http.ResponseWriter) http.ResponseWriter  {
 	return w
 }
 
-/*func getParams(r *http.Request) string {
-	pKeys := [21]string{"lpu", "dt1", "dt2", "rdt1", "rdt2" , "vdt1", "vdt2", "case_type", "district", "spec", "reg_dt1", "reg_dt2", "ref_dt1", "ref_dt2",
-		"src_spec", "src_pos", "ref_type", "src_lpu", "trg_spec", "trg_lpu", "ctrl"}
-	params := ""
-	for i := 0; i < len(pKeys); i++ {
-		if r.FormValue(pKeys[i]) != "" {
-			if len(params) > 0 {params += ","}
-			params += pKeys[i] + " := '" + r.FormValue(pKeys[i]) + "'"
-		}
-	}
-
-	return params;
-}*/
-
-
-
-
 func getRows(query string) (*sql.Rows) {
 	var err error
 	err = errFhirCon
